@@ -206,73 +206,73 @@ button:hover {
       Already have an account? <a href="#">Login here</a>
     </div>
   </div>
-  <script>
+<script>
     async function RegistrationForm() {
-    const fullName = document.getElementById('fullName').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const password = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('confirmPassword').value;
-    const userType = document.getElementById('userType').value;
+        const fullName = document.getElementById('fullName').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        const userType = document.getElementById('userType').value;
 
-    if (!fullName || !email || !phone || !password || !confirmPassword || !userType) {
-      alert("Please fill in all the fields");
-      return;
+        if (!fullName || !email || !phone || !password || !confirmPassword || !userType) {
+            alert("Please fill in all the fields");
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            alert("Passwords do not match!");
+            return;
+        }
+
+        if (password.length < 6) {
+            alert("Password must be at least 6 characters long");
+            return;
+        }
+
+        const data = {
+            Name: fullName,
+            Email: email,
+            Phone: phone,
+            Password: password,
+            userType: userType
+        };
+
+        try {
+            const response = await fetch("/submit", {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                alert(result.message);
+                document.getElementById('registrationForm').reset();
+            } else {
+                alert(result.message);
+            }
+        } catch (err) {
+            console.error("Error:", err);
+            alert("Connection error. Make sure the server is running on http://localhost:5000");
+        }
     }
 
-    if (password !== confirmPassword) {
-      alert("Passwords do not match!");
-      return;
+    // Keep your togglePassword function as it is
+    function togglePassword() {
+        const pwdField = document.getElementById('password');
+        const toggleBtn = document.querySelector('.toggle-password');
+
+        if (pwdField.type === "password") {
+            pwdField.type = "text";
+            toggleBtn.textContent = "Hide";
+        } else {
+            pwdField.type = "password";
+            toggleBtn.textContent = "Show";
+        }
     }
-
-    if (password.length < 6) {
-      alert("Password must be at least 6 characters long");
-      return;
-    }
-
-    const data = {
-      Name: fullName,
-      Email: email,
-      Phone: phone,
-      Password: password,
-      userType: userType,
-    };
-
-    try{
-      const response = await fetch("/submit",{
-        method: 'POST',
-        headers:{'Content-Type': 'application/json'},
-        body: JSON.stringify(data)
-      });
-
-      const result =response.data;
-      
-    }
-    catch(err){
-      console.log("error: "+err);
-    }
-
-    //alert("Registration Successful!\n\nWelcome to Thrifty Foods, " + fullName + "!\nYou registered as: " + userType);
-
-    document.getElementById('registrationForm').reset();
-    
-  }
-
-
-  function togglePassword() {
-    const pwdField = document.getElementById('password');
-    const toggleBtn = document.querySelector('.toggle-password');
-
-    if (pwdField.type === "password") {
-      pwdField.type = "text";
-      toggleBtn.textContent = "Hide";
-    } else {
-      pwdField.type = "password";
-      toggleBtn.textContent = "Show";
-    }
-  }
-
-  </script>
+</script>
 </body>
 
 </html>
