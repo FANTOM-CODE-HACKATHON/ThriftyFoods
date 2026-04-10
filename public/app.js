@@ -320,12 +320,12 @@ const pages = {
                 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                     <h2 class="text-3xl sm:text-4xl font-bold mb-6">Ready to Make an Impact?</h2>
                     <p class="text-xl text-green-50 mb-8">Join thousands of partners fighting food waste and hunger.</p>
-                    <button onclick="alert('Registration form would open here!')" class="inline-flex items-center justify-center bg-white text-green-600 px-10 py-4 rounded-full hover:bg-green-50 transition-colors text-lg font-semibold">
+                    <a href="/register" class="inline-flex items-center justify-center bg-white text-green-600 px-10 py-4 rounded-full hover:bg-green-50 transition-colors text-lg font-semibold">
                         Create Your Account
                         <svg class="ml-2 h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                         </svg>
-                    </button>
+                    </a>
                 </div>
             </section>
         </div>
@@ -645,7 +645,6 @@ function router() {
         app.innerHTML = pages[hash];
         app.classList.add('fade-in');
         
-        // Update active nav links
         document.querySelectorAll('.nav-link').forEach(link => {
             link.classList.remove('active');
             if (link.getAttribute('href') === `#${hash}`) {
@@ -768,7 +767,7 @@ function initializeMobileMenu() {
 
 //Initialize Map
 function InitializeMap(){
-    // No DOMContentLoaded needed if script is at the bottom
+
   const map = L.map('map').setView([19.0760, 72.8777], 10);
   
   // OpenStreetMap tiles (best free option)
