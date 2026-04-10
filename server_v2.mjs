@@ -1,5 +1,4 @@
 import express from "express"
-import mongoose from "mongoose";
 import path from 'path';
 import { fileURLToPath } from 'url';
 const app = express();
@@ -24,10 +23,10 @@ const pool = mysql.createPool({
 async function testDB() {
     try {
         const connection = await pool.getConnection();
-        console.log('✅ Successfully connected to MySQL Database');
+        console.log('Successfully connected to MySQL Database');
         connection.release();
     } catch (err) {
-        console.error('❌ Database connection failed:', err.message);
+        console.error('Database connection failed:', err.message);
     }
 }
 
