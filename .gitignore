@@ -289,3 +289,6 @@ vite.config.ts.timestamp-*
 
 #Private Key
 ThriftyFoodServerAdmin.json
+
+#private Files
+server_v1.mjs
