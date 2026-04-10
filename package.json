@@ -11,13 +11,14 @@
   },
   "license": "ISC",
   "author": "",
-  "type": "ejs",
+  "type": "commonjs",
   "main": "server.mjs",
   "scripts": {
     "test": "npm install express"
   },
   "dependencies": {
     "ejs": "^5.0.1",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "web-push": "^3.6.7"
   }
 }
