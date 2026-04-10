@@ -11,6 +11,42 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
+mongoose.connect("mongodb://localhost:27017/test")
+.then(()=>console.log("Db connected"))
+.catch(err => console.log("error",err));
+
+const UserSchema = new mongoose.Schema({
+    Name: {
+        type: String,
+        trim: true
+    },
+    Email: {
+        type: String,
+        required: true,
+        unique: true,     
+        trim: true,
+        lowercase: true    
+    },
+    Phone: {
+        type: String,
+        trim: true
+    },
+    Password: {
+        type: String,
+        required: true    
+    },
+    userType: {
+        type: String,
+    }
+}, {
+    timestamps: true   
+});
+
+
+UserSchema.index({ Email: 1 }, { unique: true });
+
+const User = mongoose.model("User",UserSchema);
+
 app.use(express.json());
 app.use(express.static("public"));
 app.use(express.urlencoded({extended: true}));
@@ -26,8 +62,23 @@ app.get("/register",async (req,res)=>{
     res.render("RegistrationPage",{title:"Register"});
 });
 
-app.get("/login",async (req,res)=>{
-    //Render Login Page
+app.post("/submit",async (req,res) =>{
+    const body = req.body;
+
+
+   const result =  await User.create({
+        Name: body.Name,
+        Email: body.Email,
+        Phone: body.Phone,
+        Password: body.Password,
+        userType: body.userType,
+    });
+
+    console.log("RESULT: " + result);
+    res.json({ 
+        status: "success", 
+        message: "Data received successfully!",
+    });
 });
 
 app.listen(PORT,()=>{
