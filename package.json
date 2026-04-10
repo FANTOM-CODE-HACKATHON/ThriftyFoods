@@ -1,0 +1,23 @@
+{
+  "name": "thriftyfoods",
+  "version": "1.0.0",
+  "description": "Waste Food Management Website",
+  "keywords": [
+    "FANTOM"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FANTOM-CODE-HACKATHON"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "ejs",
+  "main": "server.mjs",
+  "scripts": {
+    "test": "npm install express"
+  },
+  "dependencies": {
+    "ejs": "^5.0.1",
+    "express": "^5.2.1"
+  }
+}
